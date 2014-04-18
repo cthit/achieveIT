@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417235656) do
+ActiveRecord::Schema.define(version: 20140418130321) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20140417235656) do
     t.string   "cid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "achievement_id"
   end
+
+  add_index "unlocks", ["achievement_id"], name: "index_unlocks_on_achievement_id", using: :btree
 
 end

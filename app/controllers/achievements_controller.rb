@@ -51,7 +51,6 @@ class AchievementsController < ApplicationController
   end
 
   def show
-
   end
 
   private

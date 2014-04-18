@@ -12,10 +12,17 @@ class AchievementsController < ApplicationController
 
   def create
     @achievement = Achievement.new(achievement_params)
-    if @achievement.save 
-      redirect_to(@achievement)
-    else
-      render action: 'new'
+    respond_to do |format| 
+      if @achievement.save 
+        format.html { redirect_to(@achievement) }
+        format.json { render json: @achievement, 
+                            status: :created, 
+                            location: @achievement}
+      else
+        format.html {render action: 'new'}
+        format.json {render json: @achievement.errors, 
+                          status: :unprocessable_entity}
+      end
     end
   end
 

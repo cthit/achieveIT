@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417222930) do
+ActiveRecord::Schema.define(version: 20140417235656) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
-    t.string   "desc"
+    t.text     "desc"
     t.string   "provider"
     t.string   "category"
     t.integer  "points"

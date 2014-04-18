@@ -1,9 +1,24 @@
 Rails.application.routes.draw do
+
+
+  get 'unlocks/index'
+
+  get 'unlocks/create'
+
+  get 'unlocks/update'
+
+  get 'unlocks/destroy'
+
+  get 'unlocks/show'
+
+  resources :achievements
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'achievements#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

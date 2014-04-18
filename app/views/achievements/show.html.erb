@@ -1,0 +1,10 @@
+<h1>Achievement#show</h1>
+<div><%= @achievement.name %></div>
+<div><%= @achievement.desc %></div>
+<div><%= @achievement.provider %></div>
+<div><%= @achievement.category %></div>
+<div><%= @achievement.points %></div>
+<p><%= link_to "Edit", edit_achievement_path(@achievement) %></p>
+<p><%= link_to "Delete", @achievement, method: :delete, 
+				data: { confirm: "Are you sure?"} %></p>
+<%= link_to "All achievements", achievements_path %>

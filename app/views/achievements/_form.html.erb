@@ -1,0 +1,32 @@
+
+<%= form_for(@achievement) do |f| %>
+
+<% if @achievement.errors.any? %>
+<ul>
+	<% @achievement.errors.full_messages.each do |m| %>
+	<li><%=m%></li>
+	<% end -%>
+</ul>
+<% end -%>
+
+<div>
+<%= f.label :name %>
+<%= f.text_field :name %>
+</div>
+<div>
+<%= f.label :desc %>
+<%= f.text_area :desc %>
+</div>
+<div>
+<%= f.label :provider %></div>
+<%= f.text_field :provider %></div>
+<div>
+<%= f.label :category %></div>
+<%= f.text_field :category %></div>
+<div>
+<%= f.label :points %></div>
+<%= f.number_field :points, min: 0, step: 5 %></div>
+
+<div><%= f.submit %></div>
+
+<% end %>

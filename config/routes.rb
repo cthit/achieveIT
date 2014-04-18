@@ -1,17 +1,8 @@
 Rails.application.routes.draw do
 
 
-  get 'unlocks/index'
+  resources :achievements, :unlocks
 
-  get 'unlocks/create'
-
-  get 'unlocks/update'
-
-  get 'unlocks/destroy'
-
-  get 'unlocks/show'
-
-  resources :achievements
 
 
   # The priority is based upon order of creation: first created -> highest priority.

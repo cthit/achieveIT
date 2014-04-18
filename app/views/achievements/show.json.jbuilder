@@ -1,0 +1,1 @@
+json.extract! @achievement, :name, :desc, :provider, :category, :points, :icon

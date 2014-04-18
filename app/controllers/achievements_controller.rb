@@ -30,19 +30,28 @@ class AchievementsController < ApplicationController
   end
 
   def update
-    if @achievement.update(achievement_params)
-      redirect_to(@achievement)
-    else
-      render action: 'edit'
+    respond_to do |format| 
+      if @achievement.update(achievement_params)
+        format.html { redirect_to(@achievement) }
+        format.json { head :no_content }
+      else
+        format.html {render action: 'edit'}
+        format.json {render json: @achievement.errors, 
+                          status: :unprocessable_entity}
+      end
     end
   end
 
   def destroy
-    @achievement.destroy
-    redirect_to(achievements_url)
+    respond_to do |format| 
+      @achievement.destroy
+      format.html { redirect_to(achievements_url) }
+      format.json { head :no_content }
+    end
   end
 
   def show
+
   end
 
   private

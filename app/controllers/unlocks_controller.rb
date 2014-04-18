@@ -1,9 +1,9 @@
 class UnlocksController < ApplicationController
 
-  before_action :set_unlock, only: [:edit, :update, :destroy]
+  before_action :set_unlock, only: [:show, :edit, :update, :destroy]
 
   def index
-    @unlocks = Unlock.all.group(:cid)
+    @unlocks = Unlock.all
   end
 
   def create
@@ -15,17 +15,12 @@ class UnlocksController < ApplicationController
     end
   end
 
-  def update
-    if @unlock.update(unlock_params)
-      redirect_to(unlocks_url)
-    else
-      render json: @unlock.errors, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     @unlock.destroy
     redirect_to(unlocks_url)
+  end
+
+  def show
   end
 
   private
@@ -34,7 +29,7 @@ class UnlocksController < ApplicationController
   end
 
   def set_unlock
-    @unlock = Achievement.find(params[:id])
+    @unlock = Unlock.find(params[:id])
   end
 
 end

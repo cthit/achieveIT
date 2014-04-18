@@ -1,2 +1,9 @@
 <h1>Unlocks#index</h1>
-<p>Find me in app/views/unlocks/index.html.erb</p>
+<ul>
+	<% @unlocks.each do |unlock| %>
+		<li>
+		<%= unlock.achievement.name %>
+		<%= unlock.cid %>
+		</li>
+	<% end %>
+</ul>

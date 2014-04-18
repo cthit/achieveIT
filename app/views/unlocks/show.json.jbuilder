@@ -1,0 +1,1 @@
+json.extract! @unlock, :cid, :achievement_id, :created_at

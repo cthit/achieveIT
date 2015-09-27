@@ -4,6 +4,7 @@
 <div><%= @achievement.provider %></div>
 <div><%= @achievement.category %></div>
 <div><%= @achievement.points %></div>
+<%= image_tag(@achievement.icon) %>
 <p><%= link_to "Edit", edit_achievement_path(@achievement) %></p>
 <p><%= link_to "Delete", @achievement, method: :delete, 
 				data: { confirm: "Are you sure?"} %></p>

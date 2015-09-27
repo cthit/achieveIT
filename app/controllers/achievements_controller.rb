@@ -12,6 +12,7 @@ class AchievementsController < ApplicationController
 
   def create
     @achievement = Achievement.new(achievement_params)
+    p params
     respond_to do |format| 
       if @achievement.save 
         format.html { redirect_to(@achievement) }
@@ -60,7 +61,7 @@ class AchievementsController < ApplicationController
 
     def achievement_params
       params.require(:achievement).permit(:name, :desc, :provider, :category, 
-                                          :points)
+                                          :points, :icon)
     end
 
 end

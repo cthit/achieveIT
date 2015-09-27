@@ -9,21 +9,11 @@
 #  pool: 5
 #  timeout: 5000
 default: &default
-   adapter: mysql2
-   pool: 5
-   timeout: 5000
-   database: achieveIT
-   username: achieveIT
-   password: lolboll
+   adapter: sqlite3
 
 development:
-   adapter: mysql2
-   pool: 5
-   timeout: 5000
-   database: achieveIT
-   username: achieveIT
-   password: lolboll
-
+   <<: *default
+   database: db/dev.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

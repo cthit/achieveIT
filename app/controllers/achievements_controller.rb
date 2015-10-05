@@ -1,5 +1,5 @@
 class AchievementsController < ApplicationController
-
+  before_action :restrict_access, only: [:create, :update, :destroy]
   before_action :set_achievement, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -11,17 +11,16 @@ class AchievementsController < ApplicationController
   end
 
   def create
-    @achievement = Achievement.new(achievement_params)
-    p params
-    respond_to do |format| 
-      if @achievement.save 
+    @achievement = @provider.achievements.build(achievement_params)
+    respond_to do |format|
+      if @achievement.save
         format.html { redirect_to(@achievement) }
-        format.json { render json: @achievement, 
-                            status: :created, 
+        format.json { render json: @achievement,
+                            status: :created,
                             location: @achievement}
       else
         format.html {render action: 'new'}
-        format.json {render json: @achievement.errors, 
+        format.json {render json: @achievement.errors,
                           status: :unprocessable_entity}
       end
     end
@@ -31,20 +30,20 @@ class AchievementsController < ApplicationController
   end
 
   def update
-    respond_to do |format| 
+    respond_to do |format|
       if @achievement.update(achievement_params)
         format.html { redirect_to(@achievement) }
         format.json { head :no_content }
       else
         format.html {render action: 'edit'}
-        format.json {render json: @achievement.errors, 
+        format.json {render json: @achievement.errors,
                           status: :unprocessable_entity}
       end
     end
   end
 
   def destroy
-    respond_to do |format| 
+    respond_to do |format|
       @achievement.destroy
       format.html { redirect_to(achievements_url) }
       format.json { head :no_content }
@@ -60,8 +59,15 @@ class AchievementsController < ApplicationController
     end
 
     def achievement_params
-      params.require(:achievement).permit(:name, :desc, :provider, :category, 
+      params.require(:achievement).permit(:name, :code, :desc, :category,
                                           :points, :icon)
+    end
+
+    def restrict_access
+      authenticate_or_request_with_http_token do |token, options|
+        @provider = Provider.find_by(api_key: token)
+        @provider.present?
+      end
     end
 
 end

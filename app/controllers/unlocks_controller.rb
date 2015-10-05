@@ -1,4 +1,5 @@
 class UnlocksController < ApplicationController
+  before_action :restrict_access, only: [:create, :update, :destroy]
 
   before_action :set_unlock, only: [:show, :edit, :update, :destroy]
 
@@ -7,7 +8,11 @@ class UnlocksController < ApplicationController
   end
 
   def create
-    @unlock = Unlock.new(unlock_params)
+    params = unlock_params
+    @achievement = Achievement.find_by(provider: @provider, code: params[:code])
+
+    @unlock = @achievement.unlocks.build(cid: params[:cid])
+
     if @unlock.save
       render json: @unlock, status: :created, location: @unlock
     else
@@ -25,11 +30,18 @@ class UnlocksController < ApplicationController
 
   private
   def unlock_params
-    params.require(:unlock).permit(:cid, :achievement_id)
+    params.require(:unlock).permit(:cid, :code)
   end
 
   def set_unlock
     @unlock = Unlock.find(params[:id])
+  end
+
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      @provider = Provider.find_by(api_key: token)
+      @provider.present?
+    end
   end
 
 end

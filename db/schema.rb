@@ -11,26 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418143038) do
+ActiveRecord::Schema.define(version: 20151005174618) do
 
-  create_table "achievements", force: true do |t|
+  create_table "achievements", force: :cascade do |t|
     t.string   "name"
     t.text     "desc"
-    t.string   "provider"
+    t.integer  "provider_id"
     t.string   "category"
     t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "icon"
+    t.string   "code"
   end
 
-  create_table "unlocks", force: true do |t|
+  add_index "achievements", ["provider_id"], name: "index_achievements_on_provider_id"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string "provider"
+    t.string "key"
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string   "api_key"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "unlocks", force: :cascade do |t|
     t.string   "cid"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "achievement_id"
   end
 
-  add_index "unlocks", ["achievement_id"], name: "index_unlocks_on_achievement_id", using: :btree
+  add_index "unlocks", ["achievement_id"], name: "index_unlocks_on_achievement_id"
 
 end

@@ -6,10 +6,6 @@ class AchievementsController < ApplicationController
     @achievements = Achievement.all
   end
 
-  def new
-    @achievement = Achievement.new(points: 0)
-  end
-
   def create
     @achievement = @provider.achievements.build(achievement_params)
     respond_to do |format|
@@ -51,6 +47,7 @@ class AchievementsController < ApplicationController
   end
 
   def show
+    @users = @achievement.unlocks.map(&:cid)
   end
 
   private

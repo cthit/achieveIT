@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :achievements, :unlocks
 
+  get 'users/:cid' => 'unlocks#index', as: :user
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

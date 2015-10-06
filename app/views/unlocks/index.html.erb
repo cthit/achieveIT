@@ -1,9 +1,7 @@
-<h1>Unlocks#index</h1>
-<ul>
-	<% @unlocks.each do |unlock| %>
-		<li>
-		<%= unlock.achievement.name %>
-		<%= unlock.cid %>
-		</li>
-	<% end %>
-</ul>
+<div class="achievements">
+    <% @achievements.each do |a| %>
+        <%= link_to a do %>
+            <%= render 'achievements/achievement', achievement: a %>
+        <% end -%>
+    <% end -%>
+</div>

@@ -1,11 +1,18 @@
-<h1>Achievement#show</h1>
-<div><%= @achievement.name %></div>
-<div><%= @achievement.desc %></div>
-<div><%= @achievement.provider %></div>
-<div><%= @achievement.category %></div>
-<div><%= @achievement.points %></div>
-<%= image_tag(@achievement.icon) %>
-<p><%= link_to "Edit", edit_achievement_path(@achievement) %></p>
-<p><%= link_to "Delete", @achievement, method: :delete, 
-				data: { confirm: "Are you sure?"} %></p>
-<%= link_to "All achievements", achievements_path %>
+<div class="single-achievement">
+    <div class="summary">
+        <%= render @achievement %>
+        <div>
+            <div><%= @achievement.desc %></div>
+            <div><%= @achievement.provider.name %></div>
+            <div><%= @achievement.category %></div>
+            <div><%= @achievement.points %> points</div>
+        </div>
+    </div>
+
+    <h2>Users with this achievement</h2>
+    <ul>
+        <% @users.each do |u| %>
+            <li><%= link_to u, user_path(u) %></li>
+        <% end %>
+    </ul>
+</div>

@@ -5,6 +5,11 @@ class UnlocksController < ApplicationController
 
   def index
     @unlocks = Unlock.all
+    if params[:cid]
+      @unlocks = @unlocks.for_user(params[:cid]).includes(:achievement)
+    end
+
+    @achievements = @unlocks.map(&:achievement)
   end
 
   def create

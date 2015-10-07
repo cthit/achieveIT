@@ -4,9 +4,10 @@ class UnlocksController < ApplicationController
   before_action :set_unlock, only: [:show, :edit, :update, :destroy]
 
   def index
-    @unlocks = Unlock.all
+    @unlocks = Unlock.order(created_at: :desc).includes(:achievement)
     if params[:cid]
-      @unlocks = @unlocks.for_user(params[:cid]).includes(:achievement)
+      @user = params[:cid]
+      @unlocks = @unlocks.for_user(@user)
     end
 
     @achievements = @unlocks.map(&:achievement)

@@ -60,11 +60,4 @@ class AchievementsController < ApplicationController
                                           :points, :icon)
     end
 
-    def restrict_access
-      authenticate_or_request_with_http_token do |token, options|
-        @provider = Provider.find_by(api_key: token)
-        @provider.present?
-      end
-    end
-
 end

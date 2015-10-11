@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
 
 
-  resources :achievements, :unlocks
-
-  get 'users/:cid' => 'unlocks#index', as: :user
-
-
+  resources :achievements, only: [:index, :create, :edit, :update, :destroy, :show]
+  resources :unlocks, only: [:index, :create, :destroy, :show]
+  resources :users, only: :show
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,15 +1,5 @@
-<% if @user.present? %>
-    <div class="achievements">
-        <% @achievements.each do |a| %>
-            <%= link_to a do %>
-                <%= render 'achievements/achievement', achievement: a %>
-            <% end -%>
-        <% end -%>
-    </div>
-<% else %>
-    <ul>
-        <% @unlocks.each do |u| %>
-            <li><%= u.achievement.name %> <%= u.cid %> <%= u.created_at %></li>
-        <% end -%>
-    </ul>
-<% end %>
+<ul>
+    <% @unlocks.each do |u| %>
+        <li><%= u.achievement.name %> <%= u.cid %> <%= u.created_at %></li>
+    <% end -%>
+</ul>

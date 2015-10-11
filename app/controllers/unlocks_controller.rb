@@ -5,11 +5,6 @@ class UnlocksController < ApplicationController
 
   def index
     @unlocks = Unlock.order(created_at: :desc).includes(:achievement)
-    if params[:cid]
-      @user = params[:cid]
-      @unlocks = @unlocks.for_user(@user)
-    end
-
     @achievements = @unlocks.map(&:achievement)
   end
 
@@ -41,13 +36,6 @@ class UnlocksController < ApplicationController
 
   def set_unlock
     @unlock = Unlock.find(params[:id])
-  end
-
-  def restrict_access
-    authenticate_or_request_with_http_token do |token, options|
-      @provider = Provider.find_by(api_key: token)
-      @provider.present?
-    end
   end
 
 end

@@ -2,7 +2,7 @@
     <div class="summary">
         <%= render @achievement %>
         <div>
-            <div><%= @achievement.desc %></div>
+            <div class="p-inline"><%= markdown @achievement.desc %></div>
             <div><%= @achievement.provider.name %></div>
             <div><%= @achievement.category %></div>
             <div><%= @achievement.points %> points</div>

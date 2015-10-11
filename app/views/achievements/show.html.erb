@@ -1,4 +1,4 @@
-<div class="single-achievement">
+<div class="achievements single-achievement">
     <div class="summary">
         <%= render @achievement %>
         <div>
@@ -9,10 +9,13 @@
         </div>
     </div>
 
-    <h2>Users with this achievement</h2>
-    <ul>
-        <% @users.each do |u| %>
-            <li><%= link_to u, user_path(u) %></li>
-        <% end %>
-    </ul>
+
+    <div>
+        <h2>Users with this achievement</h2>
+        <ul>
+            <% @users.each do |u| %>
+                <li><%= link_to u, user_path(u) %></li>
+            <% end %>
+        </ul>
+    </div>
 </div>

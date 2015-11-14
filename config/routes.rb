@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :achievements, only: [:index, :create, :edit, :update, :destroy, :show]
   resources :unlocks, only: [:index, :create, :destroy, :show]
-  resources :users, only: :show
+  resources :users, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

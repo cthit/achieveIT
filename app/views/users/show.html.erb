@@ -1,3 +1,11 @@
+<div class="info-container"> 
+	<%= @nick %> 
+</div>	
+
+<div class="info-container"> 
+	Points: <%= @points %> 
+</div>	
+
 <div class="achievements">
     <% @achievements.each do |a| %>
         <%= link_to a do %>

@@ -14,6 +14,10 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 
+gem 'httparty'
+
+gem 'redis-rails', '~> 4.0.0'
+
 gem 'sqlite3'
 
 gem 'mysql2'

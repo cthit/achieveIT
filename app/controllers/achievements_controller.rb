@@ -1,6 +1,7 @@
 class AchievementsController < ApplicationController
   before_action :restrict_access, only: [:create, :update, :destroy]
   before_action :set_achievement, only: [:show, :edit, :update, :destroy]
+  before_action :verify_access
 
   def index
     @achievements = Achievement.all

@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :nick
   helper_method :verify_access
 
+  
+  
   def restrict_access
     authenticate_or_request_with_http_token do |token, options|
       @provider = Provider.find_by(api_key: token)
@@ -21,43 +23,12 @@ class ApplicationController < ActionController::Base
   end
 
   def nick cid
-  	NickHelper.nick cid
+    NickHelper.nick cid
   end
 
-  class NickHelper
-
-		include HTTParty
-		base_uri "https://account.chalmers.it/userInfo.php"
-
-		def self.nick cid
-			Rails.cache.fetch "#{cid}/nick", expires_in: 24.hours do
-				resp = send_request(query: { cid: cid })
-				if resp['nick'].present?
-					resp['nick']
-				else
-					cid
-				end
-			end
-		end
-
-		def self.get_user token
-			send_request(query: {token: token})
-		end
-
-		private
-			def self.send_request(options)
-				resp = get("", options)
-				if resp.success? && resp['cid'].present?
-					resp
-				else
-					raise SecurityError, resp['error']
-				end
-			end
-	end	
-
-	private
-       def not_signed_in
-         redirect_to "https://account.chalmers.it?redirect_to=#{request.original_url}"
-       end
+  private
+    def not_signed_in
+      redirect_to "https://account.chalmers.it?redirect_to=#{request.original_url}"
+    end
 
 end
